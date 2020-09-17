@@ -5,7 +5,6 @@
   </label>
 </template>
 <script>
-// import { mapGetters, mapState, mapActions, mapMutations } from 'vuex';
 export default {
   props: {
     value: {
