@@ -75,11 +75,6 @@
             </span>
           </button>
         </div>
-        <!-- TODO:
-          -- Перенести в основной компонент для testSelect вместо слота,
-          -- Исправить проблему с дириктировой для АутСайда, закрывает при выборе по всему элементу
-          -- Оставил пока по клику по ChecBox
-        -->
         <test-select
           :customValue="totSelCol"
           :items="hTable"
@@ -231,7 +226,6 @@ export default {
     }
   },
   computed: {
-    // Какие колонки показать
     hTableShow() {
       return this.hTable.filter(item => item.show);
     },
@@ -271,7 +265,6 @@ export default {
               );
           }
         }
-        // Можно переписать на While, просто изначально использовал for
         for (let i = this.startEndRec.start; i < this.startEndRec.end; i++) {
           let resetObject = productJson[i];
           resetObject.check = false;
@@ -312,7 +305,6 @@ export default {
       sObj.end = sObj.start + this.selNumDisPages.value;
       return sObj;
     },
-    // Текст для окна удаления
     textDelWindow() {
       let inTemp = '';
       if (!this.multipleRemoval && this.bufferDel) {
@@ -330,8 +322,6 @@ export default {
   },
   methods: {
     hideMenu(event) {
-      // Пошел 17-ый час и мне хочется отправить быстрее поэтому не думаю
-      // И Click OutSide не моя директива поэтому импровизирую
       if (
         event.target.classList[0] !== "deleteBtn" &&
         event.target.classList[0] !== "deleteBtnImg" &&
@@ -341,7 +331,6 @@ export default {
       }
     },
     checkProducts(position, event) {
-      // Для того чтобы не срабатывало по кнопке Удалить,
       if (event && event.target.classList[0] === 'deleteBtn') return;
       var delProducts = false;
       for (let i = 0; i < this.selProducts.length; i++){
@@ -366,7 +355,7 @@ export default {
     },
     clickSbChip(item) {
       item.sb = !item.sb;
-
+      
       // По условию мы можем сортировать только одну колонку,
       // поэтому делаем возможность сортировки только по одной
 
@@ -378,7 +367,6 @@ export default {
     },
     delProductReq() {
       if (this.multipleRemoval) {
-        // TODO: Обдумать - laoder загрузки, и как сократить повторяемый код.
         deleteProducts()
           .then(() => {
             this.$store.commit('removeProducts', this.selProducts);
@@ -392,7 +380,6 @@ export default {
         deleteProducts()
           .then(() => {
             this.confirmDel = false;
-            // Если у нас есть продукт среди выделенных, то удаляем его
             if (this.selProducts !== 0) {
               for (let i = 0; i < this.selProducts.length; i++) {
                 if (this.selProducts[i].id === this.bufferDel.id)
@@ -409,8 +396,7 @@ export default {
           });
       }
     },
-    // Событие для открыте pop-up у курсора для
-    // удаления позиции или множества позиций
+    
     delProduct(event, el, single) {
       // TODO: Дописать алгоритм для репозиционирования,
       //  если Поп-ап выходит за границы видимости
@@ -456,7 +442,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-// Стлия окна подтверждения
 .confirm-popup {
   width: 255px;
   max-width: 255px;
@@ -538,19 +523,6 @@ $greenColor: #00a11e;
   border-radius: 2px;
   padding: 0 16px;
   cursor: pointer;
-  // &:focus {
-  // //   outline: none;
-  // //   border-color: transparent;
-  // // }
-  // // &:disabled {
-  // //   color: #C6CBD4;
-  // //   background: transparent;
-  // //   border: 1px solid #C6CBD4;
-  // // }
-  // // &:hover{
-  // //   background-color: #008018;
-  // // }
-  // // 
 }
 .pagination-table{
   display: flex;
