@@ -48,8 +48,7 @@
 </template>
 <script>
 import ClickOutside from 'vue-click-outside';
-// import TestCheckBox from '@/components/TestCheckBox.vue';
-// import { mapGetters, mapState, mapActions, mapMutations } from 'vuex';
+
 export default {
   directives: {
     ClickOutside
